@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-NUsDsibJ.css",
+    "file": "assets/app-C31ioAXu.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -17,7 +17,7 @@
     "src": "src/Resources/assets/images/customers.svg"
   },
   "src/Resources/assets/images/dark-logo.svg": {
-    "file": "assets/dark-logo-P5H7MBtx.svg",
+    "file": "assets/dark-logo-Cu7FDJRL.svg",
     "src": "src/Resources/assets/images/dark-logo.svg"
   },
   "src/Resources/assets/images/empty-placeholders/customers.svg": {
@@ -45,7 +45,7 @@
     "src": "src/Resources/assets/images/error.svg"
   },
   "src/Resources/assets/images/favicon.ico": {
-    "file": "assets/favicon--PZ4cBiP.ico",
+    "file": "assets/favicon-BVOB_nIa.ico",
     "src": "src/Resources/assets/images/favicon.ico"
   },
   "src/Resources/assets/images/icon-add-product.svg": {
@@ -61,7 +61,7 @@
     "src": "src/Resources/assets/images/icon-options.svg"
   },
   "src/Resources/assets/images/logo.svg": {
-    "file": "assets/logo-CXf-crI0.svg",
+    "file": "assets/logo-YQgIC1ZP.svg",
     "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/product-placeholders/front.svg": {
@@ -173,12 +173,12 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-mk0lQkfR.js",
+    "file": "assets/app-CNXe8n_j.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-C7s3BGlm.css"
+      "assets/app-BsM4JrO0.css"
     ]
   },
   "src/Resources/assets/js/chart.js": {

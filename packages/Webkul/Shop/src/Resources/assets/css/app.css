@@ -10,8 +10,122 @@
     font-display: block;
 }
 
+/**
+ * @license
+ *
+ * Font Family: Technor
+ * Designed by: Jean-Baptiste Morizot
+ * URL: https://www.fontshare.com/fonts/technor
+ * © 2023 Indian Type Foundry
+ *
+ * Font Styles:
+ * Technor Variable(Variable font)
+ * Technor Extralight
+ * Technor Light
+ * Technor Regular
+ * Technor Medium
+ * Technor Semibold
+ * Technor Bold
+ * Technor Black
+ *
+*/
+
+
+/**
+* This is a variable font
+* You can controll variable axes as shown below:
+* font-variation-settings: 'wght' 900.0;
+*
+* available axes:
+
+* 'wght' (range from 200.0 to 900.0)
+
+*/
+
+@font-face {
+    font-family: 'Technor-Variable';
+    src: url('../fonts/Technor-Variable.woff2') format('woff2'),
+        url('../fonts/Technor-Variable.woff') format('woff');
+    font-weight: 200 900;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Technor-Extralight';
+    src: url('../fonts/Technor-Extralight.woff2') format('woff2'),
+        url('../fonts/Technor-Extralight.woff') format('woff');
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Technor-Light';
+    src: url('../fonts/Technor-Light.woff2') format('woff2'),
+        url('../fonts/Technor-Light.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Technor-Regular';
+    src: url('../fonts/Technor-Regular.woff2') format('woff2'),
+        url('../fonts/Technor-Regular.woff') format('woff');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Technor-Medium';
+    src: url('../fonts/Technor-Medium.woff2') format('woff2'),
+        url('../fonts/Technor-Medium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Technor-Semibold';
+    src: url('../fonts/Technor-Semibold.woff2') format('woff2'),
+        url('../fonts/Technor-Semibold.woff') format('woff');
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Technor-Bold';
+    src: url('../fonts/Technor-Bold.woff2') format('woff2'),
+        url('../fonts/Technor-Bold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Technor-Black';
+    src: url('../fonts/Technor-Black.woff2') format('woff2'),
+        url('../fonts/Technor-Black.woff') format('woff');
+    font-weight: 900;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+
+
 img.lazy {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 @layer components {
@@ -323,7 +437,7 @@ img.lazy {
     .icon-users:before {
         content: "\e942";
     }
-      
+
 
     .journal-scroll::-webkit-scrollbar {
         width: 14px;
@@ -346,11 +460,11 @@ img.lazy {
     }
 
     .scrollbar-width-hidden {
-        -ms-overflow-style: none; 
+        -ms-overflow-style: none;
         scrollbar-width: none;
     }
 
-    .scrollbar-width-hidden::-webkit-scrollbar { 
+    .scrollbar-width-hidden::-webkit-scrollbar {
         display: none;
     }
 
@@ -369,7 +483,7 @@ img.lazy {
     }
 
     * {
-        @apply box-border font-poppins;
+        @apply box-border font-lexend;
     }
 
     .scrollbar-hide::-webkit-scrollbar {
@@ -391,7 +505,7 @@ img.lazy {
     .direction-rtl {
         direction: rtl;
     }
-    
+
     .label-pending,
     .label-processing,
     .label-closed,
@@ -402,22 +516,22 @@ img.lazy {
         @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
     }
 
-	.label-pending {
-		@apply bg-yellow-500;
-	}
-
-	.label-processing{
-		@apply bg-cyan-600;
+    .label-pending {
+        @apply bg-yellow-500;
     }
 
-	.label-completed,
-    .label-active {
-		@apply bg-green-600;
-	}
+    .label-processing {
+        @apply bg-cyan-600;
+    }
 
-	.label-closed {
-		@apply bg-indigo-600;
-	}
+    .label-completed,
+    .label-active {
+        @apply bg-green-600;
+    }
+
+    .label-closed {
+        @apply bg-indigo-600;
+    }
 
     .label-canceled {
         @apply bg-rose-600;
@@ -430,7 +544,7 @@ img.lazy {
     .primary-button {
         @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
     }
-    
+
     .secondary-button {
         @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
     }
@@ -459,7 +573,7 @@ img.lazy {
         0% {
             opacity: 0;
         }
-        
+
         100% {
             opacity: 1;
         }
@@ -481,7 +595,7 @@ img.lazy {
         inset: 0;
         display: grid;
         place-content: center;
-        font-family: 'DM Serif Display';
+        font-family: 'Technor';
         overflow: hidden;
         letter-spacing: 24px;
     }
@@ -506,7 +620,7 @@ img.lazy {
     html {
         margin-top: 0px !important;
     }
-    
+
     .break-word-custom {
         word-break: break-word;
     }

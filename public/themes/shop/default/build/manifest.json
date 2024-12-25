@@ -1,8 +1,72 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-BR6Myw-v.css",
+    "file": "assets/app-DED4LLHq.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
+  },
+  "src/Resources/assets/fonts/Technor-Black.eot": {
+    "file": "assets/Technor-Black-B8GiAm0m.eot",
+    "src": "src/Resources/assets/fonts/Technor-Black.eot"
+  },
+  "src/Resources/assets/fonts/Technor-Black.woff": {
+    "file": "assets/Technor-Black-Bz3QAU71.woff",
+    "src": "src/Resources/assets/fonts/Technor-Black.woff"
+  },
+  "src/Resources/assets/fonts/Technor-Black.woff2": {
+    "file": "assets/Technor-Black-z2o5Hzz3.woff2",
+    "src": "src/Resources/assets/fonts/Technor-Black.woff2"
+  },
+  "src/Resources/assets/fonts/Technor-Bold.woff": {
+    "file": "assets/Technor-Bold-B469EfxN.woff",
+    "src": "src/Resources/assets/fonts/Technor-Bold.woff"
+  },
+  "src/Resources/assets/fonts/Technor-Extralight.eot": {
+    "file": "assets/Technor-Extralight-s9OHy73W.eot",
+    "src": "src/Resources/assets/fonts/Technor-Extralight.eot"
+  },
+  "src/Resources/assets/fonts/Technor-Extralight.woff": {
+    "file": "assets/Technor-Extralight-BFKEkRRj.woff",
+    "src": "src/Resources/assets/fonts/Technor-Extralight.woff"
+  },
+  "src/Resources/assets/fonts/Technor-Light.woff": {
+    "file": "assets/Technor-Light-CaKg_Noz.woff",
+    "src": "src/Resources/assets/fonts/Technor-Light.woff"
+  },
+  "src/Resources/assets/fonts/Technor-Light.woff2": {
+    "file": "assets/Technor-Light-C8wcjS2O.woff2",
+    "src": "src/Resources/assets/fonts/Technor-Light.woff2"
+  },
+  "src/Resources/assets/fonts/Technor-Medium.eot": {
+    "file": "assets/Technor-Medium-F1enBll1.eot",
+    "src": "src/Resources/assets/fonts/Technor-Medium.eot"
+  },
+  "src/Resources/assets/fonts/Technor-Medium.woff": {
+    "file": "assets/Technor-Medium-Ux0LYr9I.woff",
+    "src": "src/Resources/assets/fonts/Technor-Medium.woff"
+  },
+  "src/Resources/assets/fonts/Technor-Medium.woff2": {
+    "file": "assets/Technor-Medium-DbVbeb5y.woff2",
+    "src": "src/Resources/assets/fonts/Technor-Medium.woff2"
+  },
+  "src/Resources/assets/fonts/Technor-Regular.eot": {
+    "file": "assets/Technor-Regular-bag0iLA2.eot",
+    "src": "src/Resources/assets/fonts/Technor-Regular.eot"
+  },
+  "src/Resources/assets/fonts/Technor-Regular.woff": {
+    "file": "assets/Technor-Regular-DpHTn3dx.woff",
+    "src": "src/Resources/assets/fonts/Technor-Regular.woff"
+  },
+  "src/Resources/assets/fonts/Technor-Semibold.woff": {
+    "file": "assets/Technor-Semibold-BPdpcd3w.woff",
+    "src": "src/Resources/assets/fonts/Technor-Semibold.woff"
+  },
+  "src/Resources/assets/fonts/Technor-Semibold.woff2": {
+    "file": "assets/Technor-Semibold-CEM5fNiq.woff2",
+    "src": "src/Resources/assets/fonts/Technor-Semibold.woff2"
+  },
+  "src/Resources/assets/fonts/Technor-Variable.eot": {
+    "file": "assets/Technor-Variable-Cgyc95uD.eot",
+    "src": "src/Resources/assets/fonts/Technor-Variable.eot"
   },
   "src/Resources/assets/fonts/bagisto-shop.woff": {
     "file": "assets/bagisto-shop-CwjLXSBu.woff",
@@ -21,7 +85,7 @@
     "src": "src/Resources/assets/images/empty-dwn-product.png"
   },
   "src/Resources/assets/images/favicon.ico": {
-    "file": "assets/favicon-Df9chQdB.ico",
+    "file": "assets/favicon-BVOB_nIa.ico",
     "src": "src/Resources/assets/images/favicon.ico"
   },
   "src/Resources/assets/images/hero-image.jpg": {
@@ -36,8 +100,12 @@
     "file": "assets/large-product-placeholder-B9xoAuKQ.webp",
     "src": "src/Resources/assets/images/large-product-placeholder.webp"
   },
+  "src/Resources/assets/images/logo-dark.svg": {
+    "file": "assets/logo-dark-Cu7FDJRL.svg",
+    "src": "src/Resources/assets/images/logo-dark.svg"
+  },
   "src/Resources/assets/images/logo.svg": {
-    "file": "assets/logo-CZWQQgOF.svg",
+    "file": "assets/logo-YQgIC1ZP.svg",
     "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/medium-product-placeholder.webp": {
@@ -81,12 +149,12 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-CG--VZHn.js",
+    "file": "assets/app-Cc4P1OhT.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-CjC7gl3E.css"
+      "assets/app-DsP8OK1c.css"
     ]
   }
 }

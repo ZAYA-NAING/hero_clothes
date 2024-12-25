@@ -37,9 +37,14 @@ module.exports = {
             },
 
             fontFamily: {
-                poppins: ["Poppins"],
-                dmserif: ["DM Serif Display"],
+                technor: ["Technor"],
+                lexend: ["Lexend Exa"],
             },
+
+            // fontFamily: {
+            //     poppins: ["Poppins"],
+            //     technor: ["DM Serif Display"],
+            // },
         }
     },
 

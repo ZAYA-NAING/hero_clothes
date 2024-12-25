@@ -14,7 +14,7 @@
         'status'     => 1,
         'theme_code' => $channel->theme,
         'channel_id' => $channel->id,
-    ]); 
+    ]);
 @endphp
 
 <!-- Features -->
@@ -30,7 +30,7 @@
 
                     <div class="max-lg:grid max-lg:justify-center">
                         <!-- Service Title -->
-                        <p class="font-dmserif text-base font-medium max-md:text-xl max-sm:text-sm">{{$service['title']}}</p>
+                        <p class="lexend text-base font-medium max-md:text-xl max-sm:text-sm">{{$service['title']}}</p>
 
                         <!-- Service Description -->
                         <p class="mt-2.5 max-w-[217px] text-sm font-medium text-zinc-500 max-md:mt-0 max-md:text-base max-sm:text-xs">
