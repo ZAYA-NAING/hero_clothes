@@ -23,6 +23,7 @@
         >
         </script>
 
+
         <script
             type="text/x-template"
             id="v-paypal-smart-button-template"

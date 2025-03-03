@@ -8,6 +8,7 @@ use Webkul\Shop\Http\Controllers\API\CompareController;
 use Webkul\Shop\Http\Controllers\API\CoreController;
 use Webkul\Shop\Http\Controllers\API\CustomerController;
 use Webkul\Shop\Http\Controllers\API\OnepageController;
+use Webkul\Shop\Http\Controllers\API\PaymentMethodController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
@@ -104,6 +105,16 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('', 'store')->name('shop.api.customers.account.addresses.store');
 
             Route::put('edit/{id?}', 'update')->name('shop.api.customers.account.addresses.update');
+        });
+
+        Route::controller(PaymentMethodController::class)->prefix('payment-methods')->group(function () {
+            Route::get('', 'index')->name('shop.api.customers.account.payment_methods.index');
+
+            Route::post('', 'store')->name('shop.api.customers.account.payment_methods.store');
+
+            Route::put('edit/{id?}', 'update')->name('shop.api.customers.account.payment_methods.update');
+
+            Route::get('add', 'getSupportedPaymentMethods')->name('shop.api.customers.account.payment_methods.add.supported_payment_methods');
         });
 
         Route::controller(WishlistController::class)->prefix('wishlist')->group(function () {

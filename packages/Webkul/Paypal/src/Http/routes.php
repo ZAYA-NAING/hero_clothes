@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Paypal\Http\Controllers\SmartButtonController;
+use Webkul\Paypal\Http\Controllers\AdvSmartButtonController;
 use Webkul\Paypal\Http\Controllers\StandardController;
 
 Route::group(['middleware' => ['web']], function () {
@@ -17,6 +18,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/create-order', [SmartButtonController::class, 'createOrder'])->name('paypal.smart-button.create-order');
 
         Route::post('/capture-order', [SmartButtonController::class, 'captureOrder'])->name('paypal.smart-button.capture-order');
+    });
+    Route::prefix('paypal/adv-smart-button')->group(function () {
+        Route::post('/create-order', [AdvSmartButtonController::class, 'createOrder'])->name('paypal.adv-smart-button.create-order');
+
+        Route::post('/capture-order', [AdvSmartButtonController::class, 'captureOrder'])->name('paypal.adv-smart-button.capture-order');
     });
 });
 

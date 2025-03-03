@@ -108,6 +108,8 @@ class OnepageController extends APIController
 
         Cart::collectTotals();
 
+        // $customer = auth()->guard('customer')->user();
+
         return response()->json(Payment::getSupportedPaymentMethods());
     }
 

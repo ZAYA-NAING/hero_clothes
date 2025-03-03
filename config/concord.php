@@ -30,6 +30,8 @@ return [
         \Webkul\Notification\Providers\ModuleServiceProvider::class,
         \Webkul\Payment\Providers\ModuleServiceProvider::class,
         \Webkul\Paypal\Providers\ModuleServiceProvider::class,
+        \Webkul\PaypalV2\Providers\ModuleServiceProvider::class,
+        \Webkul\Stripe\Providers\ModuleServiceProvider::class,
         \Webkul\Product\Providers\ModuleServiceProvider::class,
         \Webkul\Rule\Providers\ModuleServiceProvider::class,
         \Webkul\Sales\Providers\ModuleServiceProvider::class,

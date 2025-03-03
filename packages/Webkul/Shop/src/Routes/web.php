@@ -16,3 +16,8 @@ require 'customer-routes.php';
  * cart, coupons, etc will be placed here.
  */
 require 'checkout-routes.php';
+
+/**
+ *
+ */
+require 'subscribe-routes.php';

@@ -1,28 +1,16 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-DED4LLHq.css",
+    "file": "assets/app-VZnzxEnA.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
-  },
-  "src/Resources/assets/fonts/Technor-Black.eot": {
-    "file": "assets/Technor-Black-B8GiAm0m.eot",
-    "src": "src/Resources/assets/fonts/Technor-Black.eot"
   },
   "src/Resources/assets/fonts/Technor-Black.woff": {
     "file": "assets/Technor-Black-Bz3QAU71.woff",
     "src": "src/Resources/assets/fonts/Technor-Black.woff"
   },
-  "src/Resources/assets/fonts/Technor-Black.woff2": {
-    "file": "assets/Technor-Black-z2o5Hzz3.woff2",
-    "src": "src/Resources/assets/fonts/Technor-Black.woff2"
-  },
   "src/Resources/assets/fonts/Technor-Bold.woff": {
     "file": "assets/Technor-Bold-B469EfxN.woff",
     "src": "src/Resources/assets/fonts/Technor-Bold.woff"
-  },
-  "src/Resources/assets/fonts/Technor-Extralight.eot": {
-    "file": "assets/Technor-Extralight-s9OHy73W.eot",
-    "src": "src/Resources/assets/fonts/Technor-Extralight.eot"
   },
   "src/Resources/assets/fonts/Technor-Extralight.woff": {
     "file": "assets/Technor-Extralight-BFKEkRRj.woff",
@@ -32,25 +20,9 @@
     "file": "assets/Technor-Light-CaKg_Noz.woff",
     "src": "src/Resources/assets/fonts/Technor-Light.woff"
   },
-  "src/Resources/assets/fonts/Technor-Light.woff2": {
-    "file": "assets/Technor-Light-C8wcjS2O.woff2",
-    "src": "src/Resources/assets/fonts/Technor-Light.woff2"
-  },
-  "src/Resources/assets/fonts/Technor-Medium.eot": {
-    "file": "assets/Technor-Medium-F1enBll1.eot",
-    "src": "src/Resources/assets/fonts/Technor-Medium.eot"
-  },
   "src/Resources/assets/fonts/Technor-Medium.woff": {
     "file": "assets/Technor-Medium-Ux0LYr9I.woff",
     "src": "src/Resources/assets/fonts/Technor-Medium.woff"
-  },
-  "src/Resources/assets/fonts/Technor-Medium.woff2": {
-    "file": "assets/Technor-Medium-DbVbeb5y.woff2",
-    "src": "src/Resources/assets/fonts/Technor-Medium.woff2"
-  },
-  "src/Resources/assets/fonts/Technor-Regular.eot": {
-    "file": "assets/Technor-Regular-bag0iLA2.eot",
-    "src": "src/Resources/assets/fonts/Technor-Regular.eot"
   },
   "src/Resources/assets/fonts/Technor-Regular.woff": {
     "file": "assets/Technor-Regular-DpHTn3dx.woff",
@@ -60,13 +32,17 @@
     "file": "assets/Technor-Semibold-BPdpcd3w.woff",
     "src": "src/Resources/assets/fonts/Technor-Semibold.woff"
   },
-  "src/Resources/assets/fonts/Technor-Semibold.woff2": {
-    "file": "assets/Technor-Semibold-CEM5fNiq.woff2",
-    "src": "src/Resources/assets/fonts/Technor-Semibold.woff2"
+  "src/Resources/assets/fonts/Technor-Variable.woff": {
+    "file": "assets/Technor-Variable-FhE-zOa0.woff",
+    "src": "src/Resources/assets/fonts/Technor-Variable.woff"
   },
-  "src/Resources/assets/fonts/Technor-Variable.eot": {
-    "file": "assets/Technor-Variable-Cgyc95uD.eot",
-    "src": "src/Resources/assets/fonts/Technor-Variable.eot"
+  "src/Resources/assets/fonts/Z06-Walone_Bold.ttf": {
+    "file": "assets/Z06-Walone_Bold-DGFSxo6G.ttf",
+    "src": "src/Resources/assets/fonts/Z06-Walone_Bold.ttf"
+  },
+  "src/Resources/assets/fonts/Z06-Walone_Thin.ttf": {
+    "file": "assets/Z06-Walone_Thin-DuP6bLIl.ttf",
+    "src": "src/Resources/assets/fonts/Z06-Walone_Thin.ttf"
   },
   "src/Resources/assets/fonts/bagisto-shop.woff": {
     "file": "assets/bagisto-shop-CwjLXSBu.woff",
@@ -79,6 +55,10 @@
   "src/Resources/assets/images/default-language.svg": {
     "file": "assets/default-language-BxH8WlkY.svg",
     "src": "src/Resources/assets/images/default-language.svg"
+  },
+  "src/Resources/assets/images/dinger.png": {
+    "file": "assets/dinger-BCRQQv9D.png",
+    "src": "src/Resources/assets/images/dinger.png"
   },
   "src/Resources/assets/images/empty-dwn-product.png": {
     "file": "assets/empty-dwn-product-DYRIKFWL.png",
@@ -108,9 +88,17 @@
     "file": "assets/logo-YQgIC1ZP.svg",
     "src": "src/Resources/assets/images/logo.svg"
   },
+  "src/Resources/assets/images/master.svg": {
+    "file": "assets/master-CfRAT37b.svg",
+    "src": "src/Resources/assets/images/master.svg"
+  },
   "src/Resources/assets/images/medium-product-placeholder.webp": {
     "file": "assets/medium-product-placeholder-INODB-G2.webp",
     "src": "src/Resources/assets/images/medium-product-placeholder.webp"
+  },
+  "src/Resources/assets/images/men.webp": {
+    "file": "assets/men-DBLuLxbD.webp",
+    "src": "src/Resources/assets/images/men.webp"
   },
   "src/Resources/assets/images/money-transfer.png": {
     "file": "assets/money-transfer-BNjtOcYo.png",
@@ -136,20 +124,36 @@
     "file": "assets/spinner-CWS6ej98.svg",
     "src": "src/Resources/assets/images/spinner.svg"
   },
+  "src/Resources/assets/images/stripe.png": {
+    "file": "assets/stripe-B0OjRZpw.png",
+    "src": "src/Resources/assets/images/stripe.png"
+  },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-mhMpuEVL.png",
     "src": "src/Resources/assets/images/thank-you.png"
+  },
+  "src/Resources/assets/images/unisex.webp": {
+    "file": "assets/unisex-BcofI_cw.webp",
+    "src": "src/Resources/assets/images/unisex.webp"
   },
   "src/Resources/assets/images/user-placeholder.png": {
     "file": "assets/user-placeholder-C_FiyGd9.png",
     "src": "src/Resources/assets/images/user-placeholder.png"
   },
+  "src/Resources/assets/images/visa.svg": {
+    "file": "assets/visa-7SQoPgNa.svg",
+    "src": "src/Resources/assets/images/visa.svg"
+  },
   "src/Resources/assets/images/wishlist.png": {
     "file": "assets/wishlist-DPRG46v-.png",
     "src": "src/Resources/assets/images/wishlist.png"
   },
+  "src/Resources/assets/images/women.webp": {
+    "file": "assets/women-D5KjoDIp.webp",
+    "src": "src/Resources/assets/images/women.webp"
+  },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-Cc4P1OhT.js",
+    "file": "assets/app-WBLgHx8Z.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,

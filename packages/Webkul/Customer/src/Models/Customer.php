@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Shetabit\Visitor\Traits\Visitor;
 use Webkul\Checkout\Models\CartProxy;
@@ -21,7 +22,7 @@ use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
 
 class Customer extends Authenticatable implements CustomerContract
 {
-    use HasApiTokens, HasFactory, Notifiable, Visitor;
+    use HasApiTokens, HasFactory, Notifiable, Visitor, Billable;
 
     /**
      * The table associated with the model.
@@ -167,6 +168,27 @@ class Customer extends Authenticatable implements CustomerContract
     {
         return $this->hasOne(CustomerAddressProxy::modelClass(), 'customer_id')
             ->where('default_address', 1);
+    }
+
+    /**
+     * Get the customer payment that owns the customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function customer_payment_methods()
+    {
+        return $this->hasMany(CustomerPaymentMethodProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get default customer payment that owns the customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function default_customer_payment_method()
+    {
+        return $this->hasOne(CustomerPaymentMethodProxy::modelClass(), 'customer_id')
+            ->where('default_customer_payment_method', 1);
     }
 
     /**

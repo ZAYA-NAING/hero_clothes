@@ -131,7 +131,7 @@
                         @guest('customer')
                             <x-slot:content>
                                 <div class="grid gap-2.5">
-                                    <p class="lexend text-xl">
+                                    <p class="walone text-xl">
                                         @lang('shop::app.components.layouts.header.welcome-guest')
                                     </p>
 
@@ -172,7 +172,7 @@
                         @auth('customer')
                             <x-slot:content class="!p-0">
                                 <div class="grid gap-2.5 p-5 pb-0">
-                                    <p class="lexend text-xl">
+                                    <p class="walone text-xl">
                                         @lang('shop::app.components.layouts.header.welcome')’
                                         {{ auth()->guard('customer')->user()->first_name }}
                                     </p>

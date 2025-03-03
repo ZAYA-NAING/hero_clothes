@@ -44,6 +44,30 @@ Breadcrumbs::for('addresses.edit', function (BreadcrumbTrail $trail, $entity) {
     $trail->push(trans('shop::app.customers.account.addresses.index.edit'), route('shop.customers.account.addresses.edit', $entity->id));
 });
 
+// Home > My Account > Payment Method
+Breadcrumbs::for('payment-methods', function (BreadcrumbTrail $trail) {
+    $trail->parent('account');
+    $trail->push(trans('shop::app.layouts.payment-methods'), route('shop.customers.account.payment_methods.index'));
+});
+
+// Home > My Account > Payment Method > Create
+Breadcrumbs::for('payment-methods.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('payment-methods');
+    $trail->push(trans('shop::app.customers.account.payment-methods.index.add-payment-method'), route('shop.customers.account.payment_methods.create'));
+});
+
+// Home > My Account > Payment Method > Add
+Breadcrumbs::for('payment-methods.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('payment-methods');
+    $trail->push(trans('shop::app.customers.account.payment-methods.index.add'), route('shop.customers.account.payment_methods.add'));
+});
+
+// Home > My Account > Payment Method > Edit
+Breadcrumbs::for('payment-methods.edit', function (BreadcrumbTrail $trail, $entity) {
+    $trail->parent('payment-methods');
+    $trail->push(trans('shop::app.customers.account.payment-methods.index.edit'), route('shop.customers.account.payment_methods.edit', $entity->id));
+});
+
 // Home > My Account > Orders
 Breadcrumbs::for('orders', function (BreadcrumbTrail $trail) {
     $trail->parent('account');

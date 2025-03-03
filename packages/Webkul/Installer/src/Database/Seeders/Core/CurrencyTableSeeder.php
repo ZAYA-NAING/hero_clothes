@@ -48,6 +48,7 @@ class CurrencyTableSeeder extends Seeder
         'MUR' => '₨',
         'MXN' => '$',
         'MYR' => 'RM',
+        'MMK' => 'Ks',
         'NGN' => '₦',
         'NOK' => 'kr',
         'NPR' => '₨',
@@ -92,19 +93,22 @@ class CurrencyTableSeeder extends Seeder
 
         DB::table('currencies')->delete();
 
-        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
+        $currencySymbols = json_decode(file_get_contents(__DIR__.'/../../../Data/currency_symbols.json'), true);
+
+        // $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
         $defaultCurrency = $parameters['default_currency'] ?? config('app.currency');
 
-        $currencies = $parameters['allowed_currencies'] ?? [$defaultCurrency];
+        $currencies = $parameters['allowed_currencies'] ?? [$defaultCurrency, 'MMK', 'JPY'];
 
         foreach ($currencies as $key => $currency) {
             DB::table('currencies')->insert([
                 [
                     'id'     => $key + 1,
                     'code'   => $currency,
-                    'name'   => trans('installer::app.seeders.core.currencies.'.$currency, [], $defaultLocale),
-                    'symbol' => $this->currencySymbols[$currency],
+                    // 'name'   => trans('installer::app.seeders.core.currencies.'.$currency, [], $defaultLocale),
+                    'name'   => $currencySymbols[$currency]['name'],
+                    'symbol' => $currencySymbols[$currency]['symbol'],
                 ],
             ]);
         }

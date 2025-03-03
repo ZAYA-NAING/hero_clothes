@@ -1,4 +1,4 @@
-{!! view_render_event('bagisto.admin.sales.order.create.cart.payment.before') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.payment-methods.before') !!}
 
 <v-cart-payment-methods
     :methods="paymentMethods"
@@ -9,7 +9,7 @@
     <x-admin::shimmer.sales.orders.create.cart.payment />
 </v-cart-payment-methods>
 
-{!! view_render_event('bagisto.admin.sales.order.create.cart.payment.after') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.payment-methods.after') !!}
 
 @pushOnce('scripts')
     <script
@@ -22,7 +22,7 @@
         >
             <div class="flex items-center border-b p-4 dark:border-gray-800">
                 <p class="text-base font-semibold text-gray-800 dark:text-white">
-                    @lang('admin::app.sales.orders.create.cart.payment.title')
+                    @lang('admin::app.sales.orders.create.cart.payment-methods.title')
                 </p>
             </div>
 
@@ -34,7 +34,7 @@
 
             <template v-else>
                 <div class="grid">
-                    {!! view_render_event('bagisto.admin.sales.order.create.cart.payment.before') !!}
+                    {!! view_render_event('bagisto.admin.sales.order.create.cart.payment-methods.before') !!}
 
                     <label
                         class="flex cursor-pointer items-center gap-2 border-b p-4 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
@@ -55,7 +55,7 @@
                         </p>
                     </label>
 
-                    {!! view_render_event('bagisto.admin.sales.order.create.cart.payment.after') !!}
+                    {!! view_render_event('bagisto.admin.sales.order.create.cart.payment-methods.after') !!}
                 </div>
             </template>
         </div>

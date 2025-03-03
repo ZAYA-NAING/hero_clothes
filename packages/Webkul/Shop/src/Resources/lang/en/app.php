@@ -167,6 +167,113 @@ return [
                 ],
             ],
 
+            'payment-methods' => [
+                'index' => [
+                    'add-payment-method'      => 'Add Payment Method',
+                    'create-success'   => 'Payment have been successfully added.',
+                    'default-payment'  => 'Default Payment Method',
+                    'default-delete'   => 'Default payment cannot be changed.',
+                    'delete'           => 'Delete',
+                    'delete-success'   => 'Payment successfully deleted',
+                    'edit'             => 'Edit',
+                    'edit-success'     => 'Payment updated successfully.',
+                    'empty-payment'    => 'You have not added an payment to your account yet.',
+                    'security-warning' => 'Suspicious activity found!!!',
+                    'set-as-default'   => 'Set as Default',
+                    'title'            => 'Payment Methods',
+                    'update-success'   => 'Payment have been updated successfully.',
+                ],
+
+                'create' => [
+                    'add-payment-method'      => 'Add Payment Method',
+                    'company-name'     => 'Company Name',
+                    'card-holder-name' => 'Card Holder Name',
+                    'card-number'      => 'Card Number',
+                    'card-expiration'  => 'Card Expiration',
+                    'card-cvv'         => 'Card CVV',
+                    'save'             => 'Save',
+                    'set-as-default'   => 'Set as Default',
+                    'title'            => 'Payment Methods',
+                ],
+
+                'edit' => [
+                    'company-name'     => 'Company Name',
+                    'edit'             => 'Edit',
+                    'card-holder-name' => 'Card Holder Name',
+                    'card-number'      => 'Card Number',
+                    'card-expiration'  => 'Card Expiration',
+                    'card-cvv'         => 'Card CVV',
+                    'title'            => 'Payment Methods',
+                    'update-btn'       => 'Update',
+                ],
+
+                'add' => [
+                    'add-payment-method' => 'Add Payment Method',
+                    'company-name'       => 'Company Name',
+                    'card-holder-name'   => 'Card Holder Name',
+                    'card-number'        => 'Card Number',
+                    'card-expiration'    => 'Card Expiration',
+                    'card-cvv'           => 'Card CVV',
+                    'save'               => 'Save',
+                    'set-as-default'     => 'Set as Default',
+                    'title'              => 'Payment Methods',
+                ],
+            ],
+
+            'payment-methods-add' => [
+                'index' => [
+                    'add-payment-method'      => 'Add Payment Method',
+                    'create-success'   => 'Payment have been successfully added.',
+                    'default-payment'  => 'Default Payment Method',
+                    'default-delete'   => 'Default payment cannot be changed.',
+                    'delete'           => 'Delete',
+                    'delete-success'   => 'Payment successfully deleted',
+                    'edit'             => 'Edit',
+                    'edit-success'     => 'Payment updated successfully.',
+                    'empty-payment'    => 'You have not added an payment to your account yet.',
+                    'security-warning' => 'Suspicious activity found!!!',
+                    'set-as-default'   => 'Set as Default',
+                    'title'            => 'Payment Methods',
+                    'update-success'   => 'Payment have been updated successfully.',
+                ],
+
+                'create' => [
+                    'add-payment-method'      => 'Add Payment Method',
+                    'company-name'     => 'Company Name',
+                    'card-holder-name' => 'Card Holder Name',
+                    'card-number'      => 'Card Number',
+                    'card-expiration'  => 'Card Expiration',
+                    'card-cvv'         => 'Card CVV',
+                    'save'             => 'Save',
+                    'set-as-default'   => 'Set as Default',
+                    'title'            => 'Payment Methods',
+                ],
+
+                'edit' => [
+                    'company-name'     => 'Company Name',
+                    'edit'             => 'Edit',
+                    'card-holder-name' => 'Card Holder Name',
+                    'card-number'      => 'Card Number',
+                    'card-expiration'  => 'Card Expiration',
+                    'card-cvv'         => 'Card CVV',
+                    'title'            => 'Payment Methods',
+                    'update-btn'       => 'Update',
+                ],
+
+                'add' => [
+                    'add'                => 'Add Payment Method',
+                    'company-name'       => 'Company Name',
+                    'card-holder-name'   => 'Card Holder Name',
+                    'card-number'        => 'Card Number',
+                    'card-expiration'    => 'Card Expiration',
+                    'card-cvv'           => 'Card CVV',
+                    'save'               => 'Save',
+                    'set-as-default'     => 'Set as Default',
+                    'title'              => 'Payment Methods',
+                ],
+            ],
+
+
             'orders' => [
                 'action'      => 'Action',
                 'action-view' => 'View',
@@ -413,6 +520,7 @@ return [
                 'welcome'           => 'Welcome',
                 'welcome-guest'     => 'Welcome Guest',
                 'wishlist'          => 'Wishlist',
+                'payment-methods'   => 'Payment Methods',
 
                 'desktop' => [
                     'top' => [
@@ -852,10 +960,33 @@ return [
             'success-apply'   => 'Coupon code applied successfully.',
         ],
 
+        'card' => [
+            'already-added'   => 'Card already added.',
+            'added'           => 'Card added',
+            'add'             => 'Add Card',
+            'add-issue'       => 'Card can\'t be added.',
+            'button-title'    => 'Add',
+            'code'            => 'Coupon code',
+            'discount'        => '',
+            'enter-your-code' => 'Enter your code',
+            'error'           => 'Something went wrong',
+            'invalid'         => 'Card is invalid.',
+            'remove'          => 'Remove Card',
+            'subtotal'        => 'Subtotal',
+            'success-add'     => 'Card added successfully.',
+        ],
+
         'login' => [
             'email'    => 'Email',
             'password' => 'Password',
             'title'    => 'Sign In',
+        ],
+
+        'deposit' => [
+            'amount'           => 'Amount',
+            'card-holder-name' => 'Card Holder Name',
+            'card-type'        => 'Credit or debit card',
+            'title'            => 'Desposit',
         ],
     ],
 
@@ -929,6 +1060,7 @@ return [
         'profile'               => 'Profile',
         'reviews'               => 'Reviews',
         'wishlist'              => 'Wishlist',
+        'payment-methods'       => 'Payment Methods',
     ],
 
     'subscription' => [

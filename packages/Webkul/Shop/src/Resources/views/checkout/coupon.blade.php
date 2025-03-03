@@ -1,5 +1,5 @@
 <!-- Coupon Vue Component -->
-<v-coupon 
+<v-coupon
     :cart="cart"
     @coupon-applied="getCart"
     @coupon-removed="getCart"
@@ -32,7 +32,7 @@
                         <x-shop::modal ref="couponModel">
                             <!-- Modal Toggler -->
                             <x-slot:toggle>
-                                <span 
+                                <span
                                     class="cursor-pointer text-base text-blue-700 max-sm:text-sm"
                                     role="button"
                                     tabindex="0"
@@ -96,18 +96,18 @@
                 </x-shop::form>
 
                 <!-- Applied Coupon Information Container -->
-                <div 
+                <div
                     class="font-small flex items-center justify-between text-xs"
                     v-if="cart.coupon_code"
                 >
-                    <p 
+                    <p
                         class="text-base font-medium text-navyBlue max-sm:text-sm"
                         title="@lang('shop::app.checkout.coupon.applied')"
                     >
                         "@{{ cart.coupon_code }}"
                     </p>
 
-                    <span 
+                    <span
                         class="icon-cancel cursor-pointer text-2xl max-sm:text-base"
                         title="@lang('shop::app.checkout.coupon.remove')"
                         @click="destroyCoupon"
@@ -123,7 +123,7 @@
     <script type="module">
         app.component('v-coupon', {
             template: '#v-coupon-template',
-            
+
             props: ['cart'],
 
             data() {
@@ -134,6 +134,7 @@
 
             methods: {
                 applyCoupon(params, { resetForm }) {
+                    console.log(params);
                     this.isStoring = true;
 
                     this.$axios.post("{{ route('shop.api.checkout.cart.coupon.apply') }}", params)
@@ -141,7 +142,7 @@
                             this.isStoring = false;
 
                             this.$emit('coupon-applied');
-                  
+
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             this.$refs.couponModel.toggle();

@@ -15,6 +15,7 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
         \Webkul\Customer\Models\CompareItem::class,
         \Webkul\Customer\Models\Customer::class,
         \Webkul\Customer\Models\CustomerAddress::class,
+        \Webkul\Customer\Models\CustomerPaymentMethod::class,
         \Webkul\Customer\Models\CustomerGroup::class,
         \Webkul\Customer\Models\CustomerNote::class,
         \Webkul\Customer\Models\Wishlist::class,

@@ -435,9 +435,9 @@ class Reporting
 
         $totalOrders = $this->saleReporting->getTotalOrdersProgress();
 
-        $paymentMethods = $this->saleReporting->getTopPaymentMethods(5);
+        $cutomerPaymentMethods = $this->saleReporting->getTopPaymentMethods(5);
 
-        $paymentMethods->map(function ($paymentMethod) use ($totalOrders) {
+        $cutomerPaymentMethods->map(function ($paymentMethod) use ($totalOrders) {
             if (! $totalOrders['current']) {
                 $paymentMethod->progress = 0;
             } else {
@@ -449,7 +449,7 @@ class Reporting
             $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.'.$paymentMethod->method.'.title');
         });
 
-        return $paymentMethods;
+        return $cutomerPaymentMethods;
     }
 
     /**

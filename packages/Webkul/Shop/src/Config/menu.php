@@ -19,6 +19,12 @@ return [
         'route' => 'shop.customers.account.addresses.index',
         'icon'  => 'icon-location',
         'sort'  => 2,
+    ],  [
+        'key'   => 'account.payment-methods',
+        'name'  => 'shop::app.layouts.payment-methods',
+        'route' => 'shop.customers.account.payment_methods.index',
+        'icon'  => 'icon-location',
+        'sort'  => 7,
     ], [
         'key'   => 'account.orders',
         'name'  => 'shop::app.layouts.orders',

@@ -38,13 +38,8 @@ module.exports = {
 
             fontFamily: {
                 technor: ["Technor"],
-                lexend: ["Lexend Exa"],
+                walone: ["Poppins", "Z06-Walone", "Noto Sans JP"],
             },
-
-            // fontFamily: {
-            //     poppins: ["Poppins"],
-            //     technor: ["DM Serif Display"],
-            // },
         }
     },
 

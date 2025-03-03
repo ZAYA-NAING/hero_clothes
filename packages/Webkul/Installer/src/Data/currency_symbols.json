@@ -1,7 +1,7 @@
 {
     "USD": {
         "symbol": "$",
-        "name": "US Dollar",
+        "name": "United States Dollar",
         "symbol_native": "$",
         "decimal_digits": 2,
         "rounding": 0,
@@ -630,13 +630,13 @@
         "name_plural": "Macedonian denari"
     },
     "MMK": {
-        "symbol": "MMK",
-        "name": "Myanma Kyat",
-        "symbol_native": "K",
+        "symbol": "Ks",
+        "name": "Myanmar Kyat",
+        "symbol_native": "Ks",
         "decimal_digits": 0,
         "rounding": 0,
         "code": "MMK",
-        "name_plural": "Myanma kyats"
+        "name_plural": "Myanmar kyats"
     },
     "MOP": {
         "symbol": "MOP$",

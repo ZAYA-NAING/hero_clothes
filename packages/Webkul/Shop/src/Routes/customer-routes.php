@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Shop\Http\Controllers\Customer\Account\PaymentMethodController;
 use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\OrderController;
@@ -121,6 +122,29 @@ Route::prefix('customer')->group(function () {
                 Route::patch('edit/{id}', 'makeDefault')->name('shop.customers.account.addresses.update.default');
 
                 Route::delete('delete/{id}', 'destroy')->name('shop.customers.account.addresses.delete');
+            });
+
+            /**
+             * Payment Methods.
+             */
+            Route::controller(PaymentMethodController::class)->prefix('payment-methods')->group(function () {
+                Route::get('', 'index')->name('shop.customers.account.payment_methods.index');
+
+                Route::get('create', 'create')->name('shop.customers.account.payment_methods.create');
+
+                Route::post('create', 'store')->name('shop.customers.account.payment_methods.store');
+
+                Route::get('add/{type}', 'add')->name('shop.customers.account.payment_methods.add-payment-method');
+
+                Route::get('add', 'addIndex')->name('shop.customers.account.payment_methods.add');
+
+                Route::get('edit/{id}', 'edit')->name('shop.customers.account.payment_methods.edit');
+
+                Route::put('edit/{id}', 'update')->name('shop.customers.account.payment_methods.update');
+
+                Route::patch('edit/{id}', 'makeDefault')->name('shop.customers.account.payment_methods.update.default');
+
+                Route::delete('delete/{id}', 'destroy')->name('shop.customers.account.payment_methods.delete');
             });
 
             /**

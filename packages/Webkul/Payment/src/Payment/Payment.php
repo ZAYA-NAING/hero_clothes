@@ -68,6 +68,16 @@ abstract class Payment
     }
 
     /**
+     * Get payment method types.
+     *
+     * @return array
+     */
+    public function getTypes()
+    {
+        return $this->getConfigData('types');;
+    }
+
+    /**
      * Retrieve information from payment configuration.
      *
      * @param  string  $field

@@ -136,6 +136,16 @@
          */
         window.addEventListener("load", function(event) {
             app.mount("#app");
+
+            var isDarkModeLocalStorage = parseInt(localStorage.getItem('dark_mode')) ?? 0;
+
+            document.documentElement.classList.toggle('dark', isDarkModeLocalStorage === 1);
+
+            if (isDarkModeLocalStorage) {
+                document.getElementById('logo-image').src = '{{ bagisto_asset('images/dark-logo.svg') }}';
+            } else {
+                document.getElementById('logo-image').src = '{{ bagisto_asset('images/logo.svg') }}';
+            }
         });
     </script>
 

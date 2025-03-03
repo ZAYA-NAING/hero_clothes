@@ -171,6 +171,7 @@ return [
                 'MUR' => 'Mauritian Rupee',
                 'MXN' => 'Mexican Peso',
                 'MYR' => 'Malaysian Ringgit',
+                'MMK' => 'Myanmar Kyat',
                 'NGN' => 'Nigerian Naira',
                 'NOK' => 'Norwegian Krone',
                 'NPR' => 'Nepalese Rupee',
@@ -215,7 +216,9 @@ return [
                 'hi_IN' => 'Hindi',
                 'it'    => 'Italian',
                 'ja'    => 'Japanese',
+                'jp'    => 'Japanese',
                 'nl'    => 'Dutch',
+                'mm'    => 'Myanmar',
                 'pl'    => 'Polish',
                 'pt_BR' => 'Brazilian Portuguese',
                 'ru'    => 'Russian',
@@ -258,6 +261,26 @@ return [
                     ],
 
                     'name' => 'Bold Collections',
+                ],
+
+                'toke-bag-information' => [
+                    'content' => [
+                        'btn-title'   => 'View Details',
+                        'description' => 'Our TOTE BAG, which is made of lightweight cotton and measures 13.5 inches in length by 14.5 inches in width, is designed to be within 10 inches in length and 10 inches in width. It is printed and made with DTF Sticker, so it is reliable for color durability. Additionally, the bag is tan, and it will definitely be a good bag wherever you use it.',
+                        'title'       => 'Our TOTE BAG information!',
+                    ],
+
+                    'name' => 'Toke bag information',
+                ],
+
+                't-shirt-information' => [
+                    'content' => [
+                        'btn-title'   => 'View Details',
+                        'description' => 'Our T-SHIRT, which is made of lightweight cotton and measures 13.5 inches in length by 14.5 inches in width, is designed to be within 10 inches in length and 10 inches in width. It is printed and made with DTF Sticker, so it is reliable for color durability. Additionally, the bag is tan, and it will definitely be a good bag wherever you use it.',
+                        'title'       => 'Our T-SHIRT information!',
+                    ],
+
+                    'name' => 'T-Shirt information',
                 ],
 
                 'categories-collections' => [
@@ -387,6 +410,37 @@ return [
                     'meta-title'       => 'Winter Wear Category Meta Title',
                     'name'             => 'Winter Wear',
                     'slug'             => 'winter-wear',
+                ],
+            ],
+        ],
+
+        'hero-categories' => [
+            'category-translation' => [
+                '2' => [
+                    'description'      => 'Unisex Category Description',
+                    'meta-description' => 'Unisex Category Meta Description',
+                    'meta-keywords'    => 'Unisex Category Meta Keywords',
+                    'meta-title'       => 'Unisex Category Meta Title',
+                    'name'             => 'Unisex',
+                    'slug'             => 'unisex',
+                ],
+
+               '3' => [
+                    'description'      => 'Men Category Description',
+                    'meta-description' => 'Men Category Meta Description',
+                    'meta-keywords'    => 'Men Category Meta Keywords',
+                    'meta-title'       => 'Men Category Meta Title',
+                    'name'             => 'Men',
+                    'slug'             => 'men',
+                ],
+
+                '4' => [
+                    'description'      => 'Women Category Description',
+                    'meta-description' => 'Women Category Meta Description',
+                    'meta-keywords'    => 'Women Category Meta Keywords',
+                    'meta-title'       => 'Women Category Meta Title',
+                    'name'             => 'Women',
+                    'slug'             => 'women',
                 ],
             ],
         ],

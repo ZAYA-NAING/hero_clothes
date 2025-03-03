@@ -24,6 +24,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'stripe' => [
+    'model'  => Webkul\Customer\Models\Customer::class,
+    'key'    => env('STRIPE_KEY'),
+    'secret' => env('STRIPE_SECRET'),
+    ],
+
     'resend' => [
         'key' => env('RESEND_KEY'),
     ],

@@ -57,6 +57,7 @@ import Emitter from "./plugins/emitter";
 import Shop from "./plugins/shop";
 import VeeValidate from "./plugins/vee-validate";
 import Flatpickr from "./plugins/flatpickr";
+import StripePlugin from "./plugins/stripe-plugin";
 
 [
     Axios,
@@ -64,6 +65,15 @@ import Flatpickr from "./plugins/flatpickr";
     Shop,
     VeeValidate,
     Flatpickr,
-].forEach((plugin) => app.use(plugin));
+    StripePlugin
+].forEach((plugin, index) => {
+    index == 5 ?  app.use(StripePlugin, {
+        pk: 'pk_test_51PDRKRP0eVufA6Xrx3ou3mWQEjSTyXf6lYOQe4VvIdqYTNEQYoLJB4oMIsMdeOJ5SyRwDhtbk4dZXaqPgLoV3AI700xtVlbkI4',
+        testMode: true, // Boolean. To override the insecure host warning
+        stripeAccount: 'acct_1PDRKRP0eVufA6Xr',
+        apiVersion: '2024-12-18.acacia',
+        locale: 'en',
+    }) : app.use(plugin);
+});
 
 export default app;

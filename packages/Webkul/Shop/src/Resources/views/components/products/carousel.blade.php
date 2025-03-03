@@ -16,7 +16,7 @@
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <h2 class="lexend text-3xl max-md:text-2xl max-sm:text-xl">
+                <h2 class="walone text-3xl max-md:text-2xl max-sm:text-xl">
                     @{{ title }}
                 </h2>
 

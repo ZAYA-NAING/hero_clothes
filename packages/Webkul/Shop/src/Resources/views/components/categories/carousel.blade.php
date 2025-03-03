@@ -1,12 +1,5 @@
-<v-categories-carousel
-    src="{{ $src }}"
-    title="{{ $title }}"
-    navigation-link="{{ $navigationLink ?? '' }}"
->
-    <x-shop::shimmer.categories.carousel
-        :count="8"
-        :navigation-link="$navigationLink ?? false"
-    />
+<v-categories-carousel src="{{ $src }}" title="{{ $title }}" navigation-link="{{ $navigationLink ?? '' }}">
+    <x-shop::shimmer.categories.carousel :count="8" :navigation-link="$navigationLink ?? false" />
 </v-categories-carousel>
 
 @pushOnce('scripts')
@@ -25,7 +18,7 @@
                 >
                     <div
                         class="grid min-w-[120px] max-w-[120px] grid-cols-1 justify-items-center gap-4 font-medium max-md:min-w-20 max-md:max-w-20 max-md:gap-2.5 max-md:first:ml-4 max-sm:min-w-[60px] max-sm:max-w-[60px] max-sm:gap-1.5"
-                        v-for="category in categories"
+                        v-for="(category, index) in categories" :key="index"
                     >
                         <a
                             :href="category.slug"
@@ -33,7 +26,7 @@
                             :aria-label="category.name"
                         >
                             <x-shop::media.images.lazy
-                                ::src="category.logo?.large_image_url || '{{ bagisto_asset('images/small-product-placeholder.webp') }}'"
+                                ::src="category.logo?.large_image_url || category.image_path"
                                 width="110"
                                 height="110"
                                 class="w-full rounded-full max-sm:h-[60px] max-sm:w-[60px]"
@@ -99,6 +92,8 @@
 
                     categories: [],
 
+                    categories_image_paths: "{{ bagisto_asset_image('images/unisex.webp,images/men.webp,images/women.webp', null, true) }}",
+
                     offset: 323,
                 };
             },
@@ -114,6 +109,10 @@
                             this.isLoading = false;
 
                             this.categories = response.data.data;
+                            this.categories = response.data.data.map((category, index) => {
+                                category['image_path'] = this.categories_image_paths.split(",")[index];
+                                return category;
+                            })
                         }).catch(error => {
                             console.log(error);
                         });

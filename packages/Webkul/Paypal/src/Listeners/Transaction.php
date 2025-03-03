@@ -27,7 +27,7 @@ class Transaction
     {
         $data = request()->all();
 
-        if ($invoice->order->payment->method == 'paypal_smart_button') {
+        if ($invoice->order->payment->method == 'paypal_adv_smart_button') {
             if (isset($data['orderData']['orderID'])) {
                 $transactionDetails = $this->smartButton->getOrder($data['orderData']['orderID']);
 

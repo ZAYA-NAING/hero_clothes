@@ -161,7 +161,7 @@
                 <!-- Reviews Cards Container -->
                 <template v-else>
                     <template v-if="reviews.length">
-                        <h3 class="mb-8 lexend text-3xl max-md:mb-2.5 max-md:text-2xl max-sm:text-xl">
+                        <h3 class="mb-8 walone text-3xl max-md:mb-2.5 max-md:text-2xl max-sm:text-xl">
                             @lang('shop::app.products.view.reviews.customer-review')
 
                             ({{ $reviewHelper->getTotalReviews($product) }})
