@@ -810,6 +810,7 @@ return [
             'missing-fields'            => 'Some required fields missing for this product.',
             'missing-options'           => 'Options are missing for this product.',
             'paypal-payment-cancelled'  => 'Paypal payment has been cancelled.',
+            'stripe-payment-cancelled'  => 'Stripe payment has been cancelled.',
             'qty-missing'               => 'At least one product should have more than 1 quantity.',
             'return-to-shop'            => 'Return To Shop',
             'rule-applied'              => 'Cart rule applied',

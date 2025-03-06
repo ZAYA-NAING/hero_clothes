@@ -2463,7 +2463,7 @@ return [
             ], [
                 'name'          => 'stripe_publishable_key',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.publish-key',
-                'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.publish-key-info',
                 'type'          => 'text',
                 'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -2534,6 +2534,119 @@ return [
                     ], [
                         'title' => '10',
                         'value' => 10,
+                    ],
+                    [
+                        'title' => '11',
+                        'value' => 11,
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key'    => 'sales.payment_methods.stripe_checkout_session',
+        'name'   => 'admin::app.configuration.index.sales.payment-methods.stripe-checkout-session',
+        'info'   => 'admin::app.configuration.index.sales.payment-methods.stripe-checkout-session-info',
+        'sort'   => 11,
+        'fields' => [
+            [
+                'name'          => 'title',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type'          => 'text',
+                'depends'       => 'active:1',
+                'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'description',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name'          => 'stripe_publish_key',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.publish-key',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.publish-key-info',
+                'type'          => 'text',
+                'depends'       => 'active:1',
+                'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'stripe_secret',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
+                'type'          => 'text',
+                'depends'       => 'active:1',
+                'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'accepted_currencies',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
+                'type'          => 'text',
+                'depends'       => 'active:1',
+                'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'active',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'sandbox',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'    => 'sort',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type'    => 'select',
+                'options' => [
+                    [
+                        'title' => '1',
+                        'value' => 1,
+                    ], [
+                        'title' => '2',
+                        'value' => 2,
+                    ], [
+                        'title' => '3',
+                        'value' => 3,
+                    ], [
+                        'title' => '4',
+                        'value' => 4,
+                    ], [
+                        'title' => '5',
+                        'value' => 5,
+                    ], [
+                        'title' => '6',
+                        'value' => 6,
+                    ], [
+                        'title' => '7',
+                        'value' => 7,
+                    ], [
+                        'title' => '8',
+                        'value' => 8,
+                    ], [
+                        'title' => '9',
+                        'value' => 9,
+                    ], [
+                        'title' => '10',
+                        'value' => 10,
+                    ], [
+                        'title' => '11',
+                        'value' => 11,
                     ],
                 ],
             ],

@@ -9,7 +9,7 @@ class Standard extends Stripe
      *
      * @var string
      */
-    protected $code = 'paypal_standard';
+    protected $code = 'stripe_standard';
 
     /**
      * Line items fields mapping.
@@ -24,13 +24,13 @@ class Standard extends Stripe
     ];
 
     /**
-     * Return paypal redirect url.
+     * Return stripe redirect url.
      *
      * @return string
      */
     public function getRedirectUrl()
     {
-        return route('paypal.standard.redirect');
+        return route('stripe.standard.redirect');
     }
 
     /**
@@ -43,6 +43,38 @@ class Standard extends Stripe
         return $this->getConfigData('sandbox')
             ? 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr'
             : 'https://ipnpb.paypal.com/cgi-bin/webscr';
+    }
+
+     /**
+     * Create checkout from cart.
+     *
+     * @return array
+     */
+    public function createFromCart()
+    {
+        $cart = $this->getCart();
+
+        $stripeCustomer =  $this->getBillableInstanceForAuthenticatedCustomer();
+
+        return $stripeCustomer
+            ->allowPromotionCodes()
+            ->checkout(
+            $this->formatCartItems($cart->items),
+                [
+                    'customer_update' => [
+                        'shipping'=>'auto',
+                    ],
+                    'shipping_address_collection' => [
+                        'allowed_countries' => ['GB','US','CA','AU', 'JP', 'MM'],
+                    ],
+                    'success_url' => route('stripe.standard.success').'?session_id={CHECKOUT_SESSION_ID}',
+                    'cancel_url' => route('stripe.standard.cancel'),
+                    'metadata' => [
+                        'customer_id' => $cart->customer_id,
+                        'cart_id' => $cart->id,
+                    ],
+                ],
+        );
     }
 
     /**
@@ -59,9 +91,9 @@ class Standard extends Stripe
             'invoice'         => $cart->id,
             'currency_code'   => $cart->cart_currency_code,
             'paymentaction'   => 'sale',
-            'return'          => route('paypal.standard.success'),
-            'cancel_return'   => route('paypal.standard.cancel'),
-            'notify_url'      => route('paypal.standard.ipn'),
+            'return'          => route('stripe.standard.success'),
+            'cancel_return'   => route('stripe.standard.cancel'),
+            'notify_url'      => route('stripe.standard.ipn'),
             'charset'         => 'utf-8',
             'item_name'       => core()->getCurrentChannel()->name,
             'amount'          => $cart->sub_total,
@@ -116,5 +148,53 @@ class Standard extends Stripe
         $fields[sprintf('item_name_%d', $i)] = 'Shipping';
         $fields[sprintf('quantity_%d', $i)] = 1;
         $fields[sprintf('amount_%d', $i)] = $cart->selected_shipping_rate->price;
+    }
+
+    /**
+     * Return cart items.
+     *
+     * @param \Webkul\Checkout\Contracts\Cart  $cart
+     * @return array
+     */
+    protected function formatCartItems($cart)
+    {
+        $cartItems['price_data'] = [];
+
+        foreach ($cart->items as $item) {
+            $lineItems['price_data'] = [
+                'currency'    => $this->currencyToUse(),
+                'unit_amount' => $this->formatCurrencyValue((float) $item->price),
+                'product_data' => [
+                    'name' => $item->name,
+                    'description' => $item->getTypeInstance()->isStockable() ? 'PHYSICAL_GOODS' : 'DIGITAL_GOODS',
+                    'metadata' => [
+                        'product_id' => $item->product->id,
+                    ],
+                ],
+                'quantity'    => $item->quantity,
+            ];
+        }
+
+        return $cartItems;
+    }
+
+     /**
+     * Return cart items.
+     *
+     * @param  string  $cart
+     * @return array
+     */
+    protected function currencyToUse() {
+        $acceptedCurrency = core()->getConfigData('sales.payment_methods.stripe_smart_button.accepted_currencies');
+
+        $currentCurrency = core()->getCurrentCurrencyCode();
+
+        $acceptedCurrenciesArray = array_map('trim', explode(',', $acceptedCurrency));
+
+        $currencyToUse = in_array($currentCurrency, $acceptedCurrenciesArray)
+            ? $currentCurrency
+            : $acceptedCurrenciesArray[0];
+
+        return $currencyToUse;
     }
 }

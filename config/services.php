@@ -45,14 +45,14 @@ return [
         'default' => 'exchange_rates',
 
         'fixer' => [
-            'key'   => env('FIXER_API_KEY'),
+            'key'   => env('FIXER_API_KEY', 'c1a200c472bd295b117caeae5a333f7b'),
             'class' => 'Webkul\Core\Helpers\Exchange\FixerExchange',
         ],
 
         'exchange_rates' => [
-            'key'   => env('EXCHANGE_RATES_API_KEY'),
+            'key'   => env('EXCHANGE_RATES_API_KEY', 'ded3f149228b754f0c8921c51794af3e'),
             'class' => 'Webkul\Core\Helpers\Exchange\ExchangeRates',
-            'url'   => env('EXCHANGE_RATES_API_ENDPOINT'),
+            'url'   => env('EXCHANGE_RATES_API_ENDPOINT', 'https://api.exchangeratesapi.io/v1/convert'),
         ],
     ],
 

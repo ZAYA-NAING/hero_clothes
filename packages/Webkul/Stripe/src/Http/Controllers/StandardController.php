@@ -6,6 +6,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Stripe\Helpers\Ipn;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Transformers\OrderResource;
+use Laravel\Cashier\Cashier;
 
 class StandardController extends Controller
 {
@@ -36,7 +37,7 @@ class StandardController extends Controller
      */
     public function cancel()
     {
-        session()->flash('error', trans('shop::app.checkout.cart.paypal-payment-cancelled'));
+        session()->flash('error', trans('shop::app.checkout.cart.stripe-payment-cancelled'));
 
         return redirect()->route('shop.checkout.cart.index');
     }

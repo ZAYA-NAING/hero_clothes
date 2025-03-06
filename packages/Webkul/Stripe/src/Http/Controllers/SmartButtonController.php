@@ -2,8 +2,8 @@
 
 namespace Webkul\Stripe\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Laravel\Cashier\Cashier;
-use Laravel\Cashier\Exceptions\IncompletePayment;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Stripe\Payment\SmartButton;
 use Webkul\Sales\Repositories\InvoiceRepository;
@@ -24,34 +24,16 @@ class SmartButtonController extends Controller
     ) {}
 
     /**
-     * Get Stripe payment methods for client.
+     * Get payment methods for client.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getPaymentMethods()
     {
         try {
-            $customer = auth()->guard('customer')->user();
+            $paymentMethods = $this->smartButton->getStripeCustomer()->paymentMethods();
 
-            // Check stripe id & create stripe customer
-            $stripeCustomer = Cashier::findBillable($customer->stripe_id);
-
-            if (!$stripeCustomer) {
-                // Create a Stripe customer for the given model
-                $stripeCustomer =  $customer->createOrGetStripeCustomer();
-            }
-
-            if ($stripeCustomer) {
-                // Determines if the customer currently has at least one payment method of an optional type.
-                if ($stripeCustomer->hasPaymentMethod()) {
-                    // Get a collection of the customer's payment methods of an optional type.
-                    $paymentMethods = $stripeCustomer->paymentMethods();
-
-                    return response()->json($paymentMethods, 200);
-                } else {
-                    return response()->json(['message' => 'No stripe payment method found'], 200);
-                }
-            }
+            return response()->json($paymentMethods, 200);
         } catch (\Exception $e) {
             return response()->json(json_decode($e->getMessage()), 400);
         }
@@ -84,7 +66,7 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * Create Stripe payment method for client.
+     * Create payment method for client.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -96,27 +78,21 @@ class SmartButtonController extends Controller
 
         try {
             if ($validatedData['stripe_payment_method']) {
-                $customer = auth()->guard('customer')->user();
 
-                // Get the client instance by authenticated Stripe ID
-                $stripeCustomer = Cashier::findBillable($customer->stripe_id);
-                if (!$stripeCustomer) {
-                    // Create a Stripe customer for the given model
-                    $stripeCustomer =  $customer->createOrGetStripeCustomer();
+                $stripeCustomer = $this->smartButton->getStripeCustomer();
+
+                if ($stripeCustomer->hasDefaultPaymentMethod()) {
+
+                    $paymentMethod = $stripeCustomer->addPaymentMethod($validatedData['stripe_payment_method']['id']);
+
+                    return response()->json($paymentMethod, 200);
                 }
 
-                // Check the client's payment method and charge the payment
-                if ($stripeCustomer) {
-                    // Determines if the customer currently has not a default payment method.
-                    if (!$stripeCustomer->hasDefaultPaymentMethod()) {
-                        $paymentMethod = $stripeCustomer->updateDefaultPaymentMethod($validatedData['stripe_payment_method']['id']);
+                if (! $stripeCustomer->hasDefaultPaymentMethod()) {
 
-                        return response()->json($paymentMethod, 200);
-                    } else {
-                        $paymentMethod = $stripeCustomer->addPaymentMethod($validatedData['stripe_payment_method']['id']);
+                    $paymentMethod = $stripeCustomer->updateDefaultPaymentMethod($validatedData['stripe_payment_method']['id']);
 
-                        return response()->json($paymentMethod, 200);
-                    }
+                    return response()->json($paymentMethod, 200);
                 }
             };
         } catch (\Exception $e) {
@@ -125,52 +101,7 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * Charge the stripe payment for client.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function charge()
-    {
-        $validatedData = $this->validate(request(), [
-            'payment_method' => 'required',
-        ]);
-
-        $data = $this->buildRequestBody();
-
-        // $cart = Cart::getCart();
-
-        try {
-            if ($validatedData['payment_method']) {
-                $customer = auth()->guard('customer')->user();
-
-                // Get the client instance by authenticated Stripe ID
-                $stripeCustomer = Cashier::findBillable($customer->stripe_id);
-                if (!$stripeCustomer) {
-                    // Create a Stripe customer for the given model
-                    $stripeCustomer =  $customer->createOrGetStripeCustomer();
-                }
-                // Check the client's payment method and charge the payment
-                if ($stripeCustomer) {
-                    // The payment amount in the lowest denominator of the currency used by your application.
-                    // Example: $amount = 100; // $100 in cents. $10 in dollars. $0.10 in euros. $1 in yen. $1000 in won. $1000 in pounds. $1000 in aud. $1000 in nzd. $1000 in sgd. $1000 in rub. $1000 in hkd. $1000 in gbp. $1000 in cad. $1000 in jpy. $1000 in chf. $1000 in mxn. $1000 in myr. $1000 in thb. $1000 in pln. $1000 in nok. $1000 in sek. $1000 in
-                    $currency = env('CASHIER_CURRENCY');
-
-                    $amount = $currency == 'usd' ? $data['purchase_units'][0]['amount']['value'] / 100 : $data['purchase_units'][0]['amount']['value'];
-                    // Charge the payment of client
-                    $payment =  $stripeCustomer->payWith($amount, ['card']);
-                    // dd($payment);
-                    // $payment =  $stripeCustomer->charge($amount, $validatedData['payment_method']['id']);
-                    // TODO "This PaymentIntent is configured to accept payment methods enabled in your Dashboard. Because some of these payment methods might redirect your customer off of your page, you must provide a `return_url`. If you don't want to accept redirect-based payment methods, set `automatic_payment_methods[enabled]` to `true` and `automatic_payment_methods[allow_redirects]` to `never` when creating Setup Intents and Payment Intents."
-                    return response()->json($payment, 200);
-                }
-            };
-        } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 400);
-        }
-    }
-
-    /**
-     * Pay the stripe payment for client.
+     * Payment with card for client.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -180,59 +111,104 @@ class SmartButtonController extends Controller
             'payment_method' => 'required',
         ]);
 
+        if (! $validatedData['payment_method']) {
+            return response()->json([
+                'redirect_url' => route('shop.checkout.cart.index'),
+            ], Response::HTTP_FORBIDDEN);
+        }
+
         $data = $this->buildRequestBody();
 
-        $cart = Cart::getCart();
+        $amount = env('CASHIER_CURRENCY') === 'USD' ? $data['purchase_units'][0]['amount']['value'] : $data['purchase_units'][0]['amount']['value'];
 
-        try {
-            if ($validatedData['payment_method']) {
-                $customer = auth()->guard('customer')->user();
+        $payment = $this->smartButton->getStripeCustomer()->payWith($amount, ['card']);
 
-                // Get the client instance by authenticated Stripe ID
-                $stripeCustomer = Cashier::findBillable($customer->stripe_id);
-                if (!$stripeCustomer) {
-                    // Create a Stripe customer for the given model
-                    $stripeCustomer =  $customer->createOrGetStripeCustomer();
-                }
-                // Check the client's payment method and charge the payment
-                if ($stripeCustomer) {
-                    // The payment amount in the lowest denominator of the currency used by your application.
-                    // Example: $amount = 100; // $100 in cents. $10 in dollars. $0.10 in euros. $1 in yen. $1000 in won. $1000 in pounds. $1000 in aud. $1000 in nzd. $1000 in sgd. $1000 in rub. $1000 in hkd. $1000 in gbp. $1000 in cad. $1000 in jpy. $1000 in chf. $1000 in mxn. $1000 in myr. $1000 in thb. $1000 in pln. $1000 in nok. $1000 in sek. $1000 in
-                    $currency = env('CASHIER_CURRENCY');
-                    $amount = $currency == 'usd' ? $data['purchase_units'][0]['amount']['value'] : $data['purchase_units'][0]['amount']['value'] / 100;
-                    // $amount =(float) $cart->sub_total + $cart->tax_total + ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0) - $cart->discount_amount;
-
-                    // Charge the payment of client
-                    $payment =  $stripeCustomer->payWith($amount, ['card']);
-                    // TODO "This PaymentIntent is configured to accept payment methods enabled in your Dashboard. Because some of these payment methods might redirect your customer off of your page, you must provide a `return_url`. If you don't want to accept redirect-based payment methods, set `automatic_payment_methods[enabled]` to `true` and `automatic_payment_methods[allow_redirects]` to `never` when creating Setup Intents and Payment Intents."
-                    return response()->json($payment, 200);
-                }
-            };
-        } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 400);
-        }
+        return response()->json($payment, 200);
     }
 
     /**
-     * Stripe payment intent handling for client.
+     * Payment with card for client.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function handlePaymentIntent()
     {
+        if (Cart::hasError()) {
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+        }
+
         $validatedData = $this->validate(request(), [
             'payment_intent' => 'required',
         ]);
 
-        try {
-            if ($validatedData['payment_intent']['status'] === 'succeeded') {
-                // Save order to database
-                $result = $this->saveOrder();
-                return $result;
+        if ($validatedData['payment_intent']['status'] === 'succeeded') {
+            Cart::collectTotals();
+
+            $this->validateOrder();
+
+            $cart = Cart::getCart();
+
+            $data = (new OrderResource($cart))->jsonSerialize();
+
+            $order = $this->orderRepository->create($data);
+
+            $this->orderRepository->update(['status' => 'processing'], $order->id);
+
+            if ($order->canInvoice()) {
+                $this->invoiceRepository->create($this->prepareInvoiceData($order));
             }
-        } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
+
+            Cart::deActivateCart();
+
+            session()->flash('order_id', $order->id);
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Payment intent failed',
+            ], 400);
         }
+    }
+    /**
+     * Stripe payment intent handling for client.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function webhook()
+    {
+        // This is your Stripe CLI webhook secret for testing your endpoint locally.
+        $endpoint_secret = env('STRIPE_WEBHOOK_SECRET');
+
+        $payload = @file_get_contents('php://input');
+        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
+        $event = null;
+
+        try {
+            $event = \Stripe\Webhook::constructEvent(
+                $payload,
+                $sig_header,
+                $endpoint_secret
+            );
+        } catch (\UnexpectedValueException $e) {
+            // Invalid payload
+            return response()->json($e, 400);
+        } catch (\Stripe\Exception\SignatureVerificationException $e) {
+            // Invalid signature
+            return response()->json($e, 400);
+        }
+
+        // Handle the event
+        switch ($event->type) {
+            case 'payment_intent.succeeded':
+                $paymentIntent = $event->data->object;
+                // ... handle other event types
+            default:
+                echo 'Received unknown event type ' . $event->type;
+        }
+
+        return response()->json('', 200);
     }
 
     /**
@@ -268,75 +244,6 @@ class SmartButtonController extends Controller
             };
         } catch (\Exception $e) {
             return response()->json($e->getMessage(), 400);
-        }
-    }
-
-    /**
-     * Create Stripe payment for client.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function createPayment()
-    {
-        try {
-            $data = $this->buildRequestBody();
-            $amount = $data['purchase_units'][0]['amount'];
-            $paymentIntent = $this->smartButton->createPaymentIntent($amount);
-            return response()->json($paymentIntent, 200);
-        } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
-        }
-    }
-
-    /**
-     * Stripe payment handling for client.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function handlePayment()
-    {
-        try {
-            $payment = $this->smartButton->confirmPayment(request()->input('payment_steup_intent.payment_method'));
-            if ($payment->status === 'succeeded') {
-                // Save order to database
-                $order = $this->saveOrder();
-
-                // Redirect to success page
-                // return redirect()->route('shop.checkout.onepage.success');
-                return $order;
-            }
-        } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
-        }
-    }
-
-    /**
-     * Paypal order creation for approval of client.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function createOrder()
-    {
-        try {
-            return response()->json($this->smartButton->createOrder($this->buildRequestBody()));
-        } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
-        }
-    }
-
-    /**
-     * Capturing paypal order after approval.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function captureOrder()
-    {
-        try {
-            $this->smartButton->captureOrder(request()->input('orderData.orderID'));
-
-            return $this->saveOrder();
-        } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
         }
     }
 
@@ -495,7 +402,7 @@ class SmartButtonController extends Controller
      *
      * @return \Illuminate\Http\Response | array
      */
-    protected function saveOrder($isJsonRes = true)
+    protected function saveOrder()
     {
         if (Cart::hasError()) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
@@ -522,13 +429,9 @@ class SmartButtonController extends Controller
 
             session()->flash('order_id', $order->id);
 
-            if ($isJsonRes) {
-                return response()->json([
-                    'success' => true,
-                ]);
-            } else {
-                return ['success' => true];
-            }
+            return response()->json([
+                'success' => true,
+            ]);
         } catch (\Exception $e) {
             session()->flash('error', trans('shop::app.common.error'));
 

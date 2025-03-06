@@ -69,16 +69,17 @@ class Payment
 
         // Check stripe id & create stripe customer
         $stripeCustomer = Cashier::findBillable($customer->stripe_id);
+
         if (! $stripeCustomer) {
             $stripeCustomer =  $customer->createOrGetStripeCustomer();
         }
 
         // If stripe is not registered message
-        if (! $stripeCustomer->hasPaymentMethod()) {
-            $registeredPaymentMethods['message'] = 'No stripe payment method found';
+        if ($stripeCustomer->hasPaymentMethod()) {
+            $registeredPaymentMethods = $stripeCustomer->paymentMethods();
         }
         // Get the stripe payment methods
-        $registeredPaymentMethods = $stripeCustomer->paymentMethods();
+
 
         return $registeredPaymentMethods;
     }

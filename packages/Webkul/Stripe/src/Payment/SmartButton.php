@@ -2,12 +2,7 @@
 
 namespace Webkul\Stripe\Payment;
 
-use PayPalCheckoutSdk\Core\ProductionEnvironment;
-use PayPalCheckoutSdk\Core\SandboxEnvironment;
-use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
-use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
-use PayPalCheckoutSdk\Orders\OrdersGetRequest;
-use PayPalCheckoutSdk\Payments\CapturesRefundRequest;
+use Laravel\Cashier\Cashier;
 
 class SmartButton extends Stripe
 {
@@ -41,6 +36,24 @@ class SmartButton extends Stripe
     }
 
     /**
+     * Creat customer and a new stripe billable instance
+     *
+     * @return \Laravel\Cashier\Billable|null
+     */
+    public function getStripeCustomer()
+    {
+        if (! auth()->guard('customer')->check()) {
+            return redirect()->route('shop.customer.session.index');
+        }
+
+        $customer = auth()->guard('customer')->user();
+
+        $customer->createOrGetStripeCustomer();
+
+        return Cashier::findBillable($customer->stripe_id);
+    }
+
+    /**
      * Create the payment intent for client.
      *
      * @param  array $amount
@@ -69,76 +82,6 @@ class SmartButton extends Stripe
         return $payment;
     }
 
-    /**
-     * Create order for approval of client.
-     *
-     * @param  array  $body
-     * @return HttpResponse
-     */
-    public function createOrder($body)
-    {
-        $request = new OrdersCreateRequest;
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
-        $request->prefer('return=representation');
-        $request->body = $body;
-
-        return $this->client()->execute($request);
-    }
-
-    /**
-     * Capture order after approval.
-     *
-     * @param  string  $orderId
-     * @return HttpResponse
-     */
-    public function captureOrder($orderId)
-    {
-        $request = new OrdersCaptureRequest($orderId);
-
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
-        $request->prefer('return=representation');
-
-        $this->client()->execute($request);
-    }
-
-    /**
-     * Get order details.
-     *
-     * @param  string  $orderId
-     * @return HttpResponse
-     */
-    public function getOrder($orderId)
-    {
-        return $this->client()->execute(new OrdersGetRequest($orderId));
-    }
-
-    /**
-     * Get capture id.
-     *
-     * @param  string  $orderId
-     * @return string
-     */
-    public function getCaptureId($orderId)
-    {
-        $paypalOrderDetails = $this->getOrder($orderId);
-
-        return $paypalOrderDetails->result->purchase_units[0]->payments->captures[0]->id;
-    }
-
-    /**
-     * Refund order.
-     *
-     * @return HttpResponse
-     */
-    public function refundOrder($captureId, $body = [])
-    {
-        $request = new CapturesRefundRequest($captureId);
-
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
-        $request->body = $body;
-
-        return $this->client()->execute($request);
-    }
 
     /**
      * Return paypal redirect url
@@ -146,23 +89,5 @@ class SmartButton extends Stripe
      * @return string
      */
     public function getRedirectUrl() {}
-
-    /**
-     * Set up and return PayPal PHP SDK environment with PayPal access credentials.
-     * This sample uses SandboxEnvironment. In production, use LiveEnvironment.
-     *
-     * @return PayPalCheckoutSdk\Core\SandboxEnvironment|PayPalCheckoutSdk\Core\ProductionEnvironment
-     */
-    protected function environment()
-    {
-        $isSandbox = $this->getConfigData('sandbox') ?: false;
-
-        if ($isSandbox) {
-            return new SandboxEnvironment($this->stripePublishableKey, $this->stripeSecret);
-        }
-
-        return new ProductionEnvironment($this->stripePublishableKey, $this->stripeSecret);
-    }
-
 
 }

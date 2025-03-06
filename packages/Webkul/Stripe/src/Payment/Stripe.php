@@ -4,6 +4,7 @@ namespace Webkul\Stripe\Payment;
 
 use Illuminate\Support\Facades\Storage;
 use Stripe\StripeClient;
+use Laravel\Cashier\Cashier;
 use Webkul\Payment\Payment\Payment;
 
 abstract class Stripe extends Payment
@@ -28,6 +29,26 @@ abstract class Stripe extends Payment
     public function __construct()
     {
         $this->initialize();
+    }
+
+    /**
+     * Creat customer and a new stripe billable instance
+     *
+     * @return \Laravel\Cashier\Billable|null
+     */
+    public function getBillableInstanceForAuthenticatedCustomer()
+    {
+        if (! auth()->guard('customer')->check()) {
+            return redirect()->route('shop.customer.session.index');
+        }
+
+        $customer = auth()->guard('customer')->user();
+
+        $stripeCustomer = ! $customer->stripe_id
+            ? $customer->createOrGetStripeCustomer()
+            : Cashier::findBillable($customer->stripe_id);
+
+        return $stripeCustomer;
     }
 
     /**
@@ -116,7 +137,7 @@ abstract class Stripe extends Payment
      * @param  array  $params
      * @return string
      */
-    public function getPaypalUrl($params = [])
+    public function getStripeUrl($params = [])
     {
         return sprintf('https://www.%spaypal.com/cgi-bin/webscr%s',
             $this->getConfigData('sandbox') ? 'sandbox.' : '',

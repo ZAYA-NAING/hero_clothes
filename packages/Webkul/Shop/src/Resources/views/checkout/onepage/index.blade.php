@@ -356,7 +356,7 @@
 
                     brandImageUrls: {
                         visa: "{{ bagisto_asset('images/visa.svg')}}",
-                        mastercard: "{{ bagisto_asset('images/mastercard.svg')}}",
+                        mastercard: "{{ bagisto_asset('images/money-transfer.png')}}",
                         amex: "{{ bagisto_asset('images/money-transfer.png')}}",
                         discover:  "{{ bagisto_asset('images/money-transfer.png')}}",
                         jcb:  "{{ bagisto_asset('images/money-transfer.png')}}",

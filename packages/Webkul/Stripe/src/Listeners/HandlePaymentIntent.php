@@ -2,8 +2,8 @@
 
 namespace Webkul\Stripe\Listeners;
 
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Stripe\Payment\SmartButton;
-use Webkul\Sales\Repositories\OrderTransactionRepository;
 
 class HandlePaymentIntent
 {
@@ -14,7 +14,7 @@ class HandlePaymentIntent
      */
     public function __construct(
         protected SmartButton $smartButton,
-        protected OrderTransactionRepository $orderTransactionRepository
+        protected OrderRepository $orderRepository
     ) {}
 
     /**

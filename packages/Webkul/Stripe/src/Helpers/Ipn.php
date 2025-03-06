@@ -28,7 +28,7 @@ class Ipn
      * @return void
      */
     public function __construct(
-        protected Standard $paypalStandard,
+        protected Standard $stripeStandard,
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
     ) {}

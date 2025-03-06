@@ -3,6 +3,8 @@
     @php
         $clientId = core()->getConfigData('sales.payment_methods.stripe_smart_button.client_id');
 
+        $publishKey = core()->getConfigData('sales.payment_methods.stripe_smart_button.publish_key');
+
         $acceptedCurrency = core()->getConfigData('sales.payment_methods.stripe_smart_button.accepted_currencies');
 
         $currentCurrency = core()->getCurrentCurrencyCode();
@@ -23,7 +25,7 @@
         >
             <div>
                 <template v-if="hasPaymentMethod">
-                    <button @click="chargeStripePaymentMethod" class="primary-button rounded-2xl px-11 py-3 max-md:rounded-lg max-sm:w-full max-sm:max-w-full max-sm:py-1.5">Pay</button>
+                    <button @click="onPayWithCard" class="primary-button rounded-2xl px-11 py-3 max-md:rounded-lg max-sm:w-full max-sm:max-w-full max-sm:py-1.5">Pay</button>
                 </template>
             </div>
         </script>
@@ -40,7 +42,7 @@
 
                         hasPaymentMethod: false,
 
-                        stripe: Stripe("{{ $clientId }}"),
+                        stripe: Stripe("{{ $publishKey }}"),
                     }
                 },
 
@@ -49,26 +51,25 @@
                 mounted() {
                     this.paymentMethod = this.stripePaymentMethod;
 
-                    this.hasPaymentMethod = this.stripePaymentMethod?.message != 'No stripe payment method found';
+                    this.hasPaymentMethod = typeof this.stripePaymentMethod != 'undefined';
                 },
 
                 methods: {
-                    chargeStripePaymentMethod() {
-                        this.$axios.post("{{ route('stripe.smart-button.charge') }}", {
+                    onPayWithCard() {
+                        this.$axios.post("{{ route('stripe.smart-button.pay') }}", {
                                 payment_method: this.paymentMethod
                             })
                             .then((response) => {
                                 console.log(response);
-                                if ([400, 422, 500].includes(response.status)) {
-                                    window.location.href = "{{ route('shop.checkout.onepage.index') }}";
+                                if ([400, 422, 500].includes(response.status) || response.data.redirect_url) {
+                                    window.location.href = response.data.redirect_url;
                                 } else {
-                                    console.log(response);
-                                    this.confirm(response.data.client_secret, this.paymentMethod.id);
+                                    this.onConfirmCardPayment(response.data.client_secret, this.paymentMethod.id);
                                 }
                             });
                     },
 
-                    confirm(clientSecret, paymentMethodId) {
+                    onConfirmCardPayment(clientSecret, paymentMethodId) {
                         this.stripe.confirmCardPayment(clientSecret, {
                             payment_method: paymentMethodId,
                         }).then((result) => {
@@ -80,16 +81,20 @@
                             }
 
                             this.$axios.post("{{ route('stripe.smart-button.handle-payment-intent') }}", {
-                                payment_intent: result.paymentIntent
-                            })
-                            .then((response) => {
-                                console.log(response);
-                                if ([400, 422, 500].includes(response.status)) {
-                                    window.location.href = "{{ route('shop.checkout.onepage.index') }}";
-                                } else {
-                                    window.location.href = "{{ route('shop.checkout.onepage.success') }}";
-                                }
-                            });
+                                    payment_intent: result.paymentIntent
+                                })
+                                .then((response) => {
+                                    console.log(response);
+                                    if (result.data.error)  {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: result.data.error });
+                                    }
+
+                                    if (response.data.success) {
+                                        window.location.href = "{{ route('shop.checkout.onepage.success') }}";
+                                    } else {
+                                        window.location.href = "{{ route('shop.checkout.onepage.index') }}";
+                                    }
+                                });
                         });
                     },
                 }
