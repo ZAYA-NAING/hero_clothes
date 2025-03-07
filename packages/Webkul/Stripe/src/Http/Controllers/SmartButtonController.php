@@ -119,7 +119,11 @@ class SmartButtonController extends Controller
 
         $data = $this->buildRequestBody();
 
-        $amount = env('CASHIER_CURRENCY') === 'USD' ? $data['purchase_units'][0]['amount']['value'] : $data['purchase_units'][0]['amount']['value'];
+        $currencyCode = $data['purchase_units'][0]['amount']['currency_code'];
+
+        $cashierCurrencyCode = strtoupper(env('CASHIER_CURRENCY'));
+
+        $amount = $this->smartButton->convertPriceByCashierCurrency($data['purchase_units'][0]['amount']['value'], $currencyCode, $cashierCurrencyCode);
 
         $payment = $this->smartButton->getStripeCustomer()->payWith($amount, ['card']);
 

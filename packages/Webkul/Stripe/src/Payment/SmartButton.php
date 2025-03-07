@@ -53,6 +53,43 @@ class SmartButton extends Stripe
         return Cashier::findBillable($customer->stripe_id);
     }
 
+    public function convertPriceByCashierCurrency($amount, $currency, $cashierCurrency)
+    {
+        if ($cashierCurrency === 'JPY') {
+            if ($currency === 'MMK') {
+                $sourcePrice = core()->convertToBasePrice($amount, $currency);
+                return core()->convertPrice($sourcePrice, $cashierCurrency);
+            } else if ($currency === 'USD') {
+                $sourcePrice = core()->convertToBasePrice($amount, $currency);
+                return core()->convertPrice($sourcePrice, $cashierCurrency);
+            } else {
+                return $amount;
+            }
+        }
+
+        if ($cashierCurrency === 'USD') {
+            if ($currency === 'MMK') {
+                $sourcePrice = core()->convertToBasePrice($amount, $currency);
+                return core()->convertPrice($sourcePrice, $cashierCurrency);
+            } else if ($currency === 'JPY') {
+                return core()->convertToBasePrice($amount, $currency);
+            } else {
+                return $amount;
+            }
+        }
+
+        if ($cashierCurrency === 'MMK') {
+            if ($currency === 'USD') {
+                return core()->convertPrice($amount, $currency);
+            } else if ($currency === 'JPY') {
+                return core()->convertPrice($amount, $currency);
+            } else {
+                return $amount;
+            }
+        }
+
+    }
+
     /**
      * Create the payment intent for client.
      *

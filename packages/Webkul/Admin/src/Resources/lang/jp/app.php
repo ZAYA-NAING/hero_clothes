@@ -3928,6 +3928,21 @@ return [
                             'title'     => 'タイプ',
                         ],
                     ],
+
+                    'location-rate-shipping' => [
+                        'description' => '説明',
+                        'page-title'  => 'Location Rate Shipping',
+                        'rate'        => '料金',
+                        'status'      => 'ステータス',
+                        'country_status' => 'Country Status',
+                        'title'       => 'Title',
+                        'title-info'  => 'Location rate shipping is a shipping method where a fixed fee is specified for shipping, distance of the location. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
+                        'type'        => [
+                            'location1'  => 'D2D (Door to Door)',
+                            'location2'  => 'D2B (Dilevery to Bus Terminal)',
+                            'title'      => 'Type',
+                        ],
+                    ],
                 ],
 
                 'payment-methods' => [

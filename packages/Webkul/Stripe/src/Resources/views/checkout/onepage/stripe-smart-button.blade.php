@@ -86,17 +86,15 @@
                                 .then((response) => {
                                     console.log(response);
                                     if (result.data.error)  {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: result.data.error });
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.error });
+                                        window.location.href = "{{ route('shop.checkout.onepage.index') }}";
                                     }
 
                                     if (response.data.success) {
                                         window.location.href = "{{ route('shop.checkout.onepage.success') }}";
-                                    } else {
-                                        window.location.href = "{{ route('shop.checkout.onepage.index') }}";
                                     }
-                                });
                         });
-                    },
+                    }),
                 }
             });
         </script>

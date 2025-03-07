@@ -32,6 +32,7 @@ return [
     Webkul\Paypal\Providers\PaypalServiceProvider::class,
     Webkul\PaypalV2\Providers\PaypalV2ServiceProvider::class,
     Webkul\Stripe\Providers\StripeServiceProvider::class,
+    Webkul\MyanmarPay\Providers\MyanmarPayServiceProvider::class,
     Webkul\Product\Providers\ProductServiceProvider::class,
     Webkul\Rule\Providers\RuleServiceProvider::class,
     Webkul\Sales\Providers\SalesServiceProvider::class,

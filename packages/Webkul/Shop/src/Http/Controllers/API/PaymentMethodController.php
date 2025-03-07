@@ -93,6 +93,6 @@ class PaymentMethodController extends APIController
      */
     public function getSupportedPaymentMethods()
     {
-        return response()->json(Payment::getPaymentMethodsAccountForCustomer());
+        return response()->json(Payment::getPaymentMethods());
     }
 }

@@ -123,6 +123,15 @@ class OnepageController extends APIController
         $validatedData = $this->validate(request(), [
             'payment' => 'required',
         ]);
+        // $myanmarPay = !empty($validatedData['payment']['is_myanmarpay'])
+        //     ? [
+        //         "is_myanmarpay" => $validatedData['payment']['is_myanmarpay'],
+        //         "name" => $validatedData['payment']['name'],
+        //         "transcation_code" => $validatedData['payment']['transcation_code'],
+        //         "phone" => $validatedData['payment']['phone'],
+        //         "myanmar_wallet_payment_method_type_name" =>  $validatedData['payment']['myanmar_wallet_payment_method_type_name'],
+        //     ]
+        //     : [];
 
         if (
             Cart::hasError()
@@ -140,6 +149,7 @@ class OnepageController extends APIController
 
         return [
             'cart' => new CartResource($cart),
+            // 'myanmarpay' => $myanmarPay,
         ];
     }
 

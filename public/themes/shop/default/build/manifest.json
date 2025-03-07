@@ -104,6 +104,10 @@
     "file": "assets/money-transfer-BNjtOcYo.png",
     "src": "src/Resources/assets/images/money-transfer.png"
   },
+  "src/Resources/assets/images/myanmarpay.png": {
+    "file": "assets/myanmarpay-B1sGliQn.png",
+    "src": "src/Resources/assets/images/myanmarpay.png"
+  },
   "src/Resources/assets/images/no-address.png": {
     "file": "assets/no-address-BHTy4apn.png",
     "src": "src/Resources/assets/images/no-address.png"

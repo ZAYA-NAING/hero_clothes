@@ -1,17 +1,6 @@
 <?php
 
 return [
-    // 'stripe_standard' => [
-    //     'code'             => 'stripe_standard',
-    //     'title'            => 'Stripe Standard',
-    //     'description'      => 'Stripe Standard',
-    //     'class'            => 'Webkul\Stripe\Payment\Standard',
-    //     'sandbox'          => true,
-    //     'active'           => true,
-    //     'business_account' => 'test@webkul.com',
-    //     'sort'             => 3,
-    // ],
-
     'stripe_smart_button' => [
         'code'        => 'stripe_smart_button',
         'title'       => 'Stripe Smart Button',

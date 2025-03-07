@@ -213,6 +213,8 @@
                     return {
                         cart: null,
 
+                        myanmarpayPayment: null,
+
                         displayTax: {
                             prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
 
@@ -281,9 +283,11 @@
                             this.shippingMethods = data;
                         } else if (this.currentStep == 'payment') {
                             this.paymentMethods = data;
+                            
                             this.isStripeSmartButton = this.cart.payment_method == 'stripe_smart_button';
                         }
-
+                        // this.myanmarpayPayment = data.myanmarpay
+                        // console.log(data);
                         this.getCart();
                     },
 

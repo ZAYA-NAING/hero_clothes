@@ -87,6 +87,7 @@
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\PaypalV2\\": "packages/Webkul/PaypalV2/src",
             "Webkul\\Stripe\\": "packages/Webkul/Stripe/src",
+            "Webkul\\MyanmarPay\\": "packages/Webkul/MyanmarPay/src",
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
             "Webkul\\Product\\": "packages/Webkul/Product/src",
             "Webkul\\Rule\\": "packages/Webkul/Rule/src",

@@ -3928,6 +3928,21 @@ return [
                             'title'     => 'Type',
                         ],
                     ],
+
+                    'location-rate-shipping' => [
+                        'description' => 'Description',
+                        'page-title'  => 'Location Rate Shipping',
+                        'rate'        => 'Rate',
+                        'status'      => 'Status',
+                        'country_status' => 'Country Status',
+                        'title'       => 'Title',
+                        'title-info'  => 'Location rate shipping is a shipping method where a fixed fee is specified for shipping, distance of the location. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
+                        'type'        => [
+                            'location1'  => 'D2D (Door to Door)',
+                            'location2'  => 'D2B (Dilevery to Bus Terminal)',
+                            'title'      => 'Type',
+                        ],
+                    ],
                 ],
 
                 'payment-methods' => [
@@ -3949,6 +3964,8 @@ return [
                     'instructions'                   => 'Instructions',
                     'logo'                           => 'Logo',
                     'logo-information'               => 'Image resolution should be like 55px X 45px',
+                    'qr-code-image'                  => 'Qr Code Image',
+                    'qr-code-image-information'      => 'Image resolution should be like 55px X 45px',
                     'mailing-address'                => 'Send Check to',
                     'money-transfer'                 => 'Money Transfer',
                     'money-transfer-info'            => 'Transfer of funds from one person or account to another, often electronically, for various purposes such as transactions or remittances.',
@@ -3970,6 +3987,8 @@ return [
                     'stripe-smart-button-info'       => 'Stripe Smart Button: Simplifies online payments with customizable buttons for secure, multi-method transactions on websites and apps.',
                     'stripe-checkout-session'        => 'Stripe Checkout',
                     'stripe-checkout-sessionn-info'  => 'Stripe Checkout Session: Simplifies online payments with customizable buttons for secure, multi-method transactions on websites and apps.',
+                    'myanmarpay-manual'              => 'Myanmarpay',
+                    'myanmarpay-manual-info'         => 'Myanmarpay: Simplifies online payments with customizable buttons for secure, multi-method transactions on websites and apps.',
                     'pending'                        => 'Pending',
                     'pending-payment'                => 'Pending Payment',
                     'processing'                     => 'Processing',

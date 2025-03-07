@@ -1,4 +1,4 @@
-@if (request()->routeIs('shop.checkout.onepage.index') &&
+{{-- @if (request()->routeIs('shop.checkout.onepage.index') &&
         (bool) core()->getConfigData('sales.payment_methods.stripe_checkout_session.active'))
     @php
         $clientId = core()->getConfigData('sales.payment_methods.stripe_checkout_session.client_id');
@@ -48,4 +48,4 @@
             });
         </script>
     @endPushOnce
-@endif
+@endif --}}

@@ -19,16 +19,6 @@ class CartResource extends JsonResource
             return core()->currency($rate ?? 0);
         });
 
-        $paymentProvider =  $this->payment?->method === 'dinger_standard' ? [
-            "providerName"  => 'KBZ Pay',
-            "methodName"    => 'QR',
-            "totalAmount"   => $this->grand_total,
-            "customerPhone" =>  $this->billing_address->phone,
-            "items"         => CartItemResource::collection($this->items),
-            "orderId"       => $this->id,
-            "customerName"  => $this->billing_address->first_name . ' ' .  $this->billing_address->last_name,
-        ] : [];
-
         return [
             'id'                                 => $this->id,
             'is_guest'                           => $this->is_guest,
@@ -58,7 +48,6 @@ class CartResource extends JsonResource
             'have_stockable_items'               => $this->haveStockableItems(),
             'payment_method'                     => $this->payment?->method,
             'payment_method_title'               => core()->getConfigData('sales.payment_methods.'.$this->payment?->method.'.title'),
-            'payment_provider'                   => $paymentProvider,
         ];
     }
 }

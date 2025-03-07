@@ -3,7 +3,6 @@
 namespace Webkul\Payment;
 
 use Illuminate\Support\Facades\Config;
-use Laravel\Cashier\Cashier;
 
 class Payment
 {
@@ -24,7 +23,7 @@ class Payment
      *
      * @return array
      */
-    public function getPaymentMethods($customer = null)
+    public function getPaymentMethods()
     {
         $paymentMethods = [];
 
@@ -38,7 +37,6 @@ class Payment
                     'description'  => $paymentMethod->getDescription(),
                     'sort'         => $paymentMethod->getSortOrder(),
                     'image'        => $paymentMethod->getImage(),
-                    'registered_payment_methods' => $this->getPaymentMethodsForCustomer($customer),
                 ];
             }
         }
@@ -52,36 +50,6 @@ class Payment
         });
 
         return $paymentMethods;
-    }
-
-    /**
-     * Returns all supported payment methods account for customer
-     *
-     * @return array
-     */
-    public function getPaymentMethodsForCustomer($customer)
-    {
-        $registeredPaymentMethods = null;
-
-        if (! $customer) {
-            return $registeredPaymentMethods;
-        }
-
-        // Check stripe id & create stripe customer
-        $stripeCustomer = Cashier::findBillable($customer->stripe_id);
-
-        if (! $stripeCustomer) {
-            $stripeCustomer =  $customer->createOrGetStripeCustomer();
-        }
-
-        // If stripe is not registered message
-        if ($stripeCustomer->hasPaymentMethod()) {
-            $registeredPaymentMethods = $stripeCustomer->paymentMethods();
-        }
-        // Get the stripe payment methods
-
-
-        return $registeredPaymentMethods;
     }
 
     /**
